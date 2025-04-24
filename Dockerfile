@@ -1,6 +1,10 @@
-ARG MAINTAINER
+#ARG MAINTAINER
 FROM docker.io/tiredofit/debian:bookworm
-MAINTAINER $MAINTAINER
+#MAINTAINER $MAINTAINER
+
+ENV TZ="Europe/Berlin"
+ENV CUPSADMIN=admin
+ENV CUPSPASSWORD=password
 
 LABEL org.opencontainers.image.source="https://github.com/wus-technik/docker-printserver"
 LABEL org.opencontainers.image.description="CUPS Printer Server"
@@ -32,18 +36,26 @@ RUN apt-get update \
 # This will use port 631
 EXPOSE 631
 
-# Add user and disable sudo password checking
+# Create admin user and set password
 RUN useradd \
-  --groups=sudo,lp,lpadmin \
-  --create-home \
-  --home-dir=/home/print \
-  --shell=/bin/bash \
-  --password=$(mkpasswd print) \
-  print \
- && sed -i '/%sudo[[:space:]]/ s/ALL[[:space:]]*$/NOPASSWD:ALL/' /etc/sudoers
+    --groups=sudo,lp,lpadmin \
+    --create-home \
+    --home-dir=/home/${CUPSADMIN} \
+    --shell=/bin/bash \
+    --password=$(openssl passwd -1 ${CUPSPASSWORD}) \
+    ${CUPSADMIN} \
+ && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # Copy the default configuration file
 COPY --chown=root:lp cupsd.conf /etc/cups/cupsd.conf
 
+# Erstelle das Startskript für CUPS
+RUN mkdir -p /etc/services.d/cups \
+ && echo '#!/usr/bin/execlineb -P' > /etc/services.d/cups/run \
+ && echo 'cupsd -f' >> /etc/services.d/cups/run \
+ && chmod +x /etc/services.d/cups/run
+
 # Default command
 #CMD ["/usr/sbin/cupsd", "-f"]
+
+#COPY install /
