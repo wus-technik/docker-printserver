@@ -2,6 +2,12 @@ ARG MAINTAINER
 FROM docker.io/tiredofit/debian:bookworm
 MAINTAINER $MAINTAINER
 
+LABEL org.opencontainers.image.source="https://github.com/wus-technik/docker-printserver"
+LABEL org.opencontainers.image.description="CUPS Printer Server"
+#LABEL org.opencontainers.image.author=""
+#LABEL org.opencontainers.image.url="https://github.com/anujdatar/cups-docker/blob/main/README.md"
+#LABEL org.opencontainers.image.licenses=MIT
+
 # Install Packages (basic tools, cups, basic drivers, HP drivers)
 RUN apt-get update \
  && apt-get install -y \
@@ -40,4 +46,4 @@ RUN useradd \
 COPY --chown=root:lp cupsd.conf /etc/cups/cupsd.conf
 
 # Default command
-CMD ["/usr/sbin/cupsd", "-f"]
+#CMD ["/usr/sbin/cupsd", "-f"]
