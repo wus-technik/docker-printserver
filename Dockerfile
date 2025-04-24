@@ -49,13 +49,7 @@ RUN useradd \
 # Copy the default configuration file
 COPY --chown=root:lp cupsd.conf /etc/cups/cupsd.conf
 
-# Erstelle das Startskript für CUPS
-RUN mkdir -p /etc/services.d/cups \
- && echo '#!/usr/bin/execlineb -P' > /etc/services.d/cups/run \
- && echo 'cupsd -f' >> /etc/services.d/cups/run \
- && chmod +x /etc/services.d/cups/run
-
 # Default command
 #CMD ["/usr/sbin/cupsd", "-f"]
 
-#COPY install /
+COPY install /
