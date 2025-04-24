@@ -4,7 +4,7 @@ source /assets/functions/00-container
 PROCESS_NAME="cups"
 
 check_container_initialized
-check_service_initialized init
+check_service_initialized 10-cupsd
 liftoff
 
 print_start "Starting cups"
