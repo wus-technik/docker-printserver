@@ -1,12 +1,15 @@
 #!/command/with-contenv bash
 
 source /assets/functions/00-container
-PROCESS_NAME="cups"
+prepare_service defaults 10-cupsd
+PROCESS_NAME="cupsd"
 
 check_container_initialized
-check_service_initialized 10-cupsd
+check_service_initialized init
 liftoff
 
-print_start "Starting cups"
+print_start "Starting cupsd"
 exec /usr/sbin/cupsd -f
 #CMD ["/usr/sbin/cupsd", "-f"]
+
+#exec s6-setuidgid /usr/sbin/cupsd -f
