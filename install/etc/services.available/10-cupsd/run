@@ -9,7 +9,7 @@ check_service_initialized init
 liftoff
 
 print_start "Starting cupsd"
-exec /usr/sbin/cupsd -f
+#exec /usr/sbin/cupsd -f
 #CMD ["/usr/sbin/cupsd", "-f"]
 
-#exec s6-setuidgid /usr/sbin/cupsd -f
+exec s6-setuidgid root /usr/sbin/cupsd -f
