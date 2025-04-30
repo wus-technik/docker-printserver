@@ -1,11 +1,11 @@
 #!/command/with-contenv bash
 
 source /assets/functions/00-container
-prepare_service defaults 10-cupsd
+# prepare_service defaults 10-cupsd
 PROCESS_NAME="cupsd"
 
 check_container_initialized
-check_service_initialized init
+# check_service_initialized init
 liftoff
 
 print_start "Starting cupsd"
