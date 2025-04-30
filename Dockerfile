@@ -47,7 +47,7 @@ RUN useradd \
  && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # Copy the default configuration file
-#COPY --chown=root:lp cupsd.conf /etc/cups/cupsd.conf
+COPY --chown=root:lp cupsd.conf /etc/cups/cupsd.conf
 
 # Default command
 #CMD ["/usr/sbin/cupsd", "-f"]
