@@ -5,10 +5,10 @@ services:
     ports:
       - "631:631"
       - "631:631/udp"
-    volumes:
-      - /var/lib/docker/compose/cups102/config:/etc/cups
-      - /var/lib/docker/compose/cups102/spool:/var/spool/cups
-      - /var/lib/docker/compose/cups102/log:/var/log/cups
+#    volumes:
+#      - /var/lib/docker/compose/cups102/config:/etc/cups
+#      - /var/lib/docker/compose/cups102/spool:/var/spool/cups
+#      - /var/lib/docker/compose/cups102/log:/var/log/cups
     restart: unless-stopped
     environment:
       - TZ=Europe/Berlin
