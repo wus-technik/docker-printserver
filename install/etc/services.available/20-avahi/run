@@ -9,7 +9,7 @@ check_container_initialized
 liftoff
 
 print_start "Starting avahi-daemon"
-#exec  --daemonize
-CMD ["/usr/sbin/avahi-daemon", "--daemonize"]
+exec /usr/sbin/avahi-daemon
+#CMD ["/usr/sbin/avahi-daemon", "--daemonize"]
 
 #exec s6-setuidgid root /usr/sbin/cupsd -f
