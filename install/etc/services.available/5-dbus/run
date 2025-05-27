@@ -8,7 +8,7 @@ check_container_initialized
 # check_service_initialized init
 liftoff
 
-print_start "Starting avahi-daemon"
+print_start "Starting dbus-daemon"
 exec /usr/bin/dbus-daemon --system --nofork
 #CMD ["/usr/sbin/avahi-daemon", "--daemonize"]
 

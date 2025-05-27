@@ -22,6 +22,7 @@ RUN apt-get update \
     cups-client \
     cups-bsd \
     cups-filters \
+    cups-snmp \
     foomatic-db-compressed-ppds \
     printer-driver-all \
     openprinting-ppds \
@@ -31,7 +32,10 @@ RUN apt-get update \
     smbclient \
     printer-driver-cups-pdf \
     avahi-daemon \
+    avahi-utils \
     dbus \
+#    samba \
+#    samba-common-bin \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
@@ -55,3 +59,5 @@ RUN useradd \
 #CMD ["/usr/sbin/cupsd", "-f"]
 
 COPY install /
+
+RUN chmod 644 /usr/share/cups/model/*.PPD

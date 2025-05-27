@@ -59,11 +59,14 @@ The `cupsd.conf` file contains the configuration of the CUPS server, including a
 - **Authenticated Policy**: Authenticated access for print jobs and administration.
 - **Kerberos Policy**: Kerberos-based authentication.
 
-### Docker-Compose
+## Drivers
 
-The `docker-compose.yml` defines the Docker environment:
-- **Ports**: By default, port `631` is exposed for TCP and UDP.
-- **Volumes**: (Optional) Persistent storage for configuration, spool, and log data.
+### PPD
+PPD files are used to define printer capabilities and options.
+
+- `install/usr/share/cups/model`:
+  - KMbeuC750iux.ppd: bizhub C750i series (C750i/C650i/C550i/C450i/C360i/C300i/C250i/C287i/C257i/C227i/C286i/C266i/C226i/C4050i/C3350i/C4000i/C3300i/C3320i)
+  - Kyocera_TASKalfa_3501i.PPD: TASKalfa 3501i series
 
 ## Troubleshooting
 
