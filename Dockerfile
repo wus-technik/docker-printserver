@@ -22,7 +22,6 @@ RUN apt-get update \
     cups-client \
     cups-bsd \
     cups-filters \
-    cups-snmp \
     foomatic-db-compressed-ppds \
     printer-driver-all \
     openprinting-ppds \
