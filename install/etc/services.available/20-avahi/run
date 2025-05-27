@@ -1,0 +1,15 @@
+#!/command/with-contenv bash
+
+source /assets/functions/00-container
+# prepare_service defaults 10-cupsd
+PROCESS_NAME="avahi-daemon"
+
+check_container_initialized
+# check_service_initialized init
+liftoff
+
+print_start "Starting avahi-daemon"
+exec avahi-daemon --daemonize
+#CMD ["/usr/sbin/cupsd", "-f"]
+
+#exec s6-setuidgid root /usr/sbin/cupsd -f

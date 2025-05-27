@@ -30,6 +30,7 @@ RUN apt-get update \
     hplip \
     smbclient \
     printer-driver-cups-pdf \
+    avahi-daemon \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
