@@ -31,6 +31,7 @@ RUN apt-get update \
     smbclient \
     printer-driver-cups-pdf \
     avahi-daemon \
+    dbus \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
