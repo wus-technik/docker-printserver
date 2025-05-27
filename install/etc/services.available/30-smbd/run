@@ -1,0 +1,14 @@
+#!/command/with-contenv bash
+
+source /assets/functions/00-container
+# prepare_service defaults 10-cupsd
+PROCESS_NAME="smbd"
+
+check_container_initialized
+# check_service_initialized init
+liftoff
+
+print_start "Starting smbd"
+exec /usr/sbin/smbd --foreground --no-process-group
+
+#exec s6-setuidgid root /usr/sbin/cupsd -f

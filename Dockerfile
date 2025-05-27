@@ -34,13 +34,13 @@ RUN apt-get update \
     avahi-daemon \
     avahi-utils \
     dbus \
-#    samba \
-#    samba-common-bin \
+    samba \
+    samba-common-bin \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
 # This will use port 631
-EXPOSE 631
+EXPOSE 631 137 138 139 445
 
 # Create admin user and set password
 RUN useradd \
@@ -55,9 +55,14 @@ RUN useradd \
 # Copy the default configuration file
 #COPY --chown=root:lp cupsd.conf /etc/cups/cupsd.conf
 
-# Default command
-#CMD ["/usr/sbin/cupsd", "-f"]
+# Create spool dir for Samba
+RUN mkdir -p /var/spool/samba && chmod 1777 /var/spool/samba
+
+# Add Samba driver share directory
+RUN mkdir -p /var/lib/samba/printers/WIN64/Kyocera \
+    && mkdir -p /var/lib/samba/printers/WIN64/Konica
 
 COPY install /
 
+# Set permissions for CUPS model directory
 RUN chmod 644 /usr/share/cups/model/*.PPD
