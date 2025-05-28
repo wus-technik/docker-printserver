@@ -1,0 +1,29 @@
+#!/command/with-contenv bash
+
+bootstrap_filesystem() {
+    mkdir -p "${NGINX_WEBROOT}"
+    chown "${NGINX_USER}":"${NGINX_GROUP}" "${NGINX_WEBROOT}"
+}
+
+set_smb_values() {
+    local smb_config="/etc/samba/smb.conf"
+    if [[ -f "${smb_config}" ]]; then
+        sed -i "s|\${SAMBA_WORKGROUP}|${SAMBA_WORKGROUP}|g" "$SMB_CONF"
+        sed -i "s|\${SAMBA_REALM}|${SAMBA_REALM}|g" "$SMB_CONF"
+        sed -i "s|\${SAMBA_SERVER_STRING}|${SAMBA_SERVER_STRING}|g" "$SMB_CONF"
+    else
+        print_warn "Samba configuration file (smb.conf) not found: ${smb_config}"
+    fi
+}
+
+join_domain() {
+    if [[ -n "${SAMBA_DOMAIN}" && -n "${SAMBA_ADMIN_PASSWORD}" ]]; then
+        print_info "Joining Samba domain: ${SAMBA_DOMAIN}"
+        net ads join -U "${SAMBA_ADMIN_USER}%${SAMBA_ADMIN_PASSWORD}" || {
+            print_error "Failed to join Samba domain: ${SAMBA_DOMAIN}"
+            exit 1
+        }
+    else
+        print_warn "Samba domain or admin password not set, skipping domain join."
+    fi
+}

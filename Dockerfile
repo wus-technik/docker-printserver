@@ -79,12 +79,6 @@ RUN mkdir -p /var/lib/samba/printers/WIN64/Kyocera \
 
 COPY install /
 
-# https://github.com/tiredofit/docker-wordpress/blob/main/install/assets/functions/30-wordpress
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
+# move to functions + cont-init.d
 # Set permissions for CUPS model directory
 RUN chmod 644 /usr/share/cups/model/*.PPD
-
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["bash"]

@@ -4,4 +4,9 @@ source /assets/functions/00-container
 prepare_service
 process_name="smbd"
 
+set_smb_values
+# join_domain
+
+print_info "Samba configuration set up."
+
 liftoff
