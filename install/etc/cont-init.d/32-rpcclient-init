@@ -1,5 +1,7 @@
-#!/bin/bash
-rpcclient localhost -U root%yourpassword <<EOF
-adddriver "Windows x64" "Kyocera3501i:OEMSETUP.INF:kyocera.dll:kyoceraui.dll:kyocerasetup.dll"
-adddriver "Windows x64" "KonicaC250i:OEMSETUP.INF:kmmon.dll:kmsetup.dll:kmui.dll"
-EOF
+#!/command/with-contenv bash
+
+source /assets/functions/00-container
+prepare_service
+process_name="rpcclient-init"
+
+liftoff
