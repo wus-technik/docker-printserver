@@ -6,6 +6,11 @@ ENV TZ="Europe/Berlin"
 ENV CUPSADMIN=admin
 ENV CUPSPASSWORD=password
 
+# Neue ENV-Variablen für smb.conf
+ENV SAMBA_WORKGROUP=WORKGROUP
+ENV SAMBA_REALM=COMPANY.LOCAL
+ENV SAMBA_SERVER_STRING="Print Server (cups)"
+
 LABEL org.opencontainers.image.source="https://github.com/wus-technik/docker-printserver"
 LABEL org.opencontainers.image.description="CUPS Printer Server"
 #LABEL org.opencontainers.image.author=""
@@ -74,5 +79,12 @@ RUN mkdir -p /var/lib/samba/printers/WIN64/Kyocera \
 
 COPY install /
 
+# https://github.com/tiredofit/docker-wordpress/blob/main/install/assets/functions/30-wordpress
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Set permissions for CUPS model directory
 RUN chmod 644 /usr/share/cups/model/*.PPD
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["bash"]

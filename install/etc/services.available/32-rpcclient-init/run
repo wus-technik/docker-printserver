@@ -10,10 +10,10 @@ liftoff
 
 print_start "Running rpcclient-init once"
 
-bash -c 'rpcclient localhost -U root%yourpassword <<EOF
-adddriver "Windows x64" "Kyocera3501i:OEMSETUP.INF:kyocera.dll:kyoceraui.dll:kyocerasetup.dll"
-adddriver "Windows x64" "KonicaC250i:OEMSETUP.INF:kmmon.dll:kmsetup.dll:kmui.dll"
-EOF
-'
+#bash -c 'rpcclient localhost -U root%yourpassword <<EOF
+#adddriver "Windows x64" "Kyocera3501i:OEMSETUP.INF:kyocera.dll:kyoceraui.dll:kyocerasetup.dll"
+#adddriver "Windows x64" "KonicaC250i:OEMSETUP.INF:kmmon.dll:kmsetup.dll:kmui.dll"
+#EOF
+#'
 
 #exec s6-setuidgid root /usr/sbin/cupsd -f
