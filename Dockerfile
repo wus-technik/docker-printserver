@@ -35,11 +35,22 @@ RUN apt-get update \
     dbus \
     samba \
     samba-common-bin \
+    winbind \
+    libnss-winbind \
+    libpam-winbind \
+    krb5-user \
+    smbclient \
+    net-tools \
+    dnsutils \
+    curl \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
 # This will use port 631
 EXPOSE 631 137 138 139 445
+
+# Ensure volumes for persistent data
+VOLUME ["/etc/samba", "/var/lib/samba", "/var/cache/samba", "/etc/krb5.keytab"]
 
 # Create admin user and set password
 RUN useradd \

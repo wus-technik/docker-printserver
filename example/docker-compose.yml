@@ -1,14 +1,23 @@
 services:
   cups102:
-    image: ghcr.io/wus-technik/docker-printserver:20250424
+    image: ghcr.io/wus-technik/docker-printserver:latest
     container_name: cups102
-    ports:
-      - "631:631"
-      - "631:631/udp"
-#    volumes:
-#      - /var/lib/docker/compose/cups102/config:/etc/cups
-#      - /var/lib/docker/compose/cups102/spool:/var/spool/cups
-#      - /var/lib/docker/compose/cups102/log:/var/log/cups
+    hostname: cups102
+    user: root
+    network_mode: "host"
+    dns:
+      - 10.1.15.214
+      - 10.1.15.1
+    #    ports:
+    #      - "631:631"
+    #      - "631:631/udp"
+    #    volumes:
+    #      - /var/lib/docker/compose/cups102/config:/etc/cups
+    #      - /var/lib/docker/compose/cups102/spool:/var/spool/cups
+    #      - /var/lib/docker/compose/cups102/log:/var/log/cups
     restart: unless-stopped
     environment:
-      - TZ=Europe/Berlin
+      - DEBUG_MODE=TRUE
+      - DOMAIN=domain.local
+      - DOMAIN_USER=administrator
+      - DOMAIN_PASS='SuperSecret123!'
