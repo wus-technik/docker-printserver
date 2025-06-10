@@ -1,0 +1,9 @@
+#!/command/with-contenv bash
+
+add_drivers() {
+    # Add printer drivers using rpcclient
+    rpcclientlocalhost -U root%yourpassword <<EOF
+    adddriver "Windows x64" "Kyocera3501i:OEMSETUP.INF:kyocera.dll:kyoceraui.dll:kyocerasetup.dll"
+    adddriver "Windows x64" "KonicaC250i:OEMSETUP.INF:kmmon.dll:kmsetup.dll:kmui.dll"
+EOF
+}
