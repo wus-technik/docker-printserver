@@ -52,10 +52,10 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 # This will use port 631
-EXPOSE 631 137 138 139 445
+EXPOSE 631 137 138 139 445 5353
 
 # Ensure volumes for persistent data
-VOLUME ["/etc/samba", "/var/lib/samba", "/var/cache/samba", "/etc/krb5.keytab"]
+VOLUME ["/etc/cups", "/var/spool/cups", "/var/log/cups", "/etc/samba", "/var/lib/samba", "/var/cache/samba", "/etc/krb5.keytab"]
 
 # Create admin user and set password
 RUN useradd \
@@ -71,7 +71,7 @@ RUN useradd \
 #COPY --chown=root:lp cupsd.conf /etc/cups/cupsd.conf
 
 # Create spool dir for Samba
-RUN mkdir -p /var/spool/samba && chmod 1777 /var/spool/samba
+RUN mkdir -p /var/spool/samba && chmod 777 /var/spool/samba
 
 # Add Samba driver share directory
 RUN mkdir -p /var/lib/samba/printers/WIN64/Kyocera \
