@@ -55,7 +55,7 @@ RUN apt-get update \
 EXPOSE 631 137 138 139 445 5353
 
 # Ensure volumes for persistent data
-VOLUME ["/etc/cups", "/var/spool/cups", "/var/log/cups", "/etc/samba", "/var/lib/samba", "/var/cache/samba", "/etc/krb5.keytab"]
+# VOLUME ["/etc/cups", "/var/spool/cups", "/var/log/cups", "/etc/samba", "/var/lib/samba", "/var/cache/samba", "/etc/krb5.keytab"]
 
 # Create admin user and set password
 RUN useradd \
